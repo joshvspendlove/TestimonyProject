@@ -24,15 +24,16 @@ export class NewTestimonyComponent {
     this.testimonyForm = this.fb.group({
       title: [this.title, Validators.required],
       body: [this.body, Validators.required],
-      isPrivate:[true],
-      anonymous:[false]
+      is_private:[true],
+      is_anonymous:[false]
     });
   }
 
   onSubmit() {
     const value = this.testimonyForm.value;
+    console.log(value)
     if (this.testimonyForm.valid) {
-      const newTestimony = { title: value.title, body: value.body, is_private: value.isPrivate, is_anonymous: value.is_anonymous || false };
+      const newTestimony = { title: value.title, body: value.body, is_private: value.is_private, is_anonymous: value.is_anonymous};
       this.testimonyService.addTestimony(newTestimony);
       this.router.navigate(["../"], {relativeTo: this.route})
     }

@@ -5,7 +5,7 @@
       <div class="panel panel-default">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" (click)="onCancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-center" id="modalTitle">{{testimony.title}} - {{testimony.author}}</h4>
+          <h4 class="modal-title text-center" id="modalTitle">{{testimony.title}} - {{testimony.author}} <span *ngIf="myPost && testimony.is_anonymous && !testimony.is_private">(Anonymous)</span></h4>
         </div>
         <div class="modal-body preformatted-text">{{testimony.body}}</div>
         <div class="modal-footer">

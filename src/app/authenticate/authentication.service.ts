@@ -6,7 +6,7 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Subject, catchError } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +15,13 @@ export class AuthenticationService {
   private loggedin: boolean;
   private user_id: Number
   loggedInChangedEvent = new Subject<boolean>();
+  errorMessage = new Subject<String>();
 
   constructor(private router: Router, private http: HttpClient) {
     this.checkLoginStatus();
     this.getLoginStatus()
   }
+
   isLoggedIn() {
     return this.loggedin;
   }
@@ -55,7 +57,7 @@ export class AuthenticationService {
     if (!user) return;
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+    this.errorMessage.next(null)
     this.http
       .post<{ status: String; message: string; error?: string, user_id?: number}>(
         'http://localhost:3000/api/auth/login',
@@ -65,19 +67,27 @@ export class AuthenticationService {
       .subscribe({
         next: (result) => {
           if (!result.error && result.status == 'success') {
-            this.user_id = result.user_id || -1
+            this.user_id = result.user_id
             this.loggedin = true;
             this.loggedInChangedEvent.next(this.loggedin)
 
             this.router.navigate(['/my-testimony']);
           }
+          else
+          {
+            this.errorMessage.next("Invalid Credentials")
+            console.log("Invalid Credentials")
+          }
         },
+        error: (err: any) => {
+          this.errorMessage.next("Invalid Credentials")
+        }
       });
   }
 
   logout() {
     this.http
-      .post<{ status: String; message: string }>(
+      .post<{ status: String; message: String }>(
         'http://localhost:3000/api/auth/logout',
         {}
       )
@@ -98,7 +108,7 @@ export class AuthenticationService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post<{ message: string; status: string; error?: string }>(
+      .post<{ message: String; status: String; error?: String, user_id?: Number }>(
         'http://localhost:3000/api/auth/signup',
         user,
         { headers: headers }
@@ -106,6 +116,7 @@ export class AuthenticationService {
       .subscribe({
         next: (result) => {
           if (!result.error && result.status == 'success') {
+            this.user_id = result.user_id
             this.loggedin = true;
             this.loggedInChangedEvent.next(this.loggedin)
             this.router.navigate(['/my-testimony']);

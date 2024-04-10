@@ -4,6 +4,7 @@
       *ngFor="let testimony of testimonies"
       [testimony]="testimony"
     ></app-testimony-item>
-    <h4 *ngIf="listType=='mine' and testimonies.length == 0">No Testimonies to display. Share yours today!</h4>
+    <h4 *ngIf="listType=='mine' && testimonies.length == 0 && !loading">No Testimonies to display. Share yours today!</h4>
+    <h4 *ngIf="listType=='ours' && testimonies.length == 0 && !loading">No Testimonies to display. Login and Share yours today!</h4>
   </div>
 </div>

@@ -10,7 +10,12 @@ import { Testimony } from '../testimony.model';
 export class TestimonyListComponent implements OnInit {
   @Input() listType!: String;
   testimonies!: Testimony[];
-  constructor(private testimonyService: TestimonyService) {}
+  loading: boolean;
+  constructor(private testimonyService: TestimonyService) {
+    testimonyService.loading.subscribe(loading =>{
+      this.loading = loading
+    })
+  }
 
   ngOnInit(): void {
     if (this.listType == 'ours') {

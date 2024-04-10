@@ -19,6 +19,7 @@ export class TestimonyService {
 
   ourTestimonyListChanged = new Subject<Testimony[]>();
   myTestimonyListChanged = new Subject<Testimony[]>();
+  loading = new Subject<boolean>()
 
   constructor(
     private router: Router,
@@ -50,6 +51,7 @@ export class TestimonyService {
   }
 
   requestOurTestimonies() {
+    this.loading.next(true)
     return this.http
       .get<{ testimonies: Testimony[] }>(
         'http://localhost:3000/api/testimony/ours'
@@ -65,12 +67,14 @@ export class TestimonyService {
               );
             });
             this.ourTestimonyListChanged.next(this.ourTestimonies);
+            this.loading.next(false)
           },
         })
       );
   }
 
   requestMyTestimonies() {
+    this.loading.next(true)
     return this.http
       .get<{ testimonies: Testimony[] }>(
         'http://localhost:3000/api/testimony/mine'
@@ -85,6 +89,7 @@ export class TestimonyService {
               );
             });
             this.myTestimonyListChanged.next(this.myTestimonies);
+            this.loading.next(false)
           },
         })
       );
@@ -131,12 +136,14 @@ export class TestimonyService {
   }
 
   refreshOurTestimony() {
+    this.loading.next(true)
     this.ourTestimonies = [];
     this.ourTestimonyListChanged.next(this.ourTestimonies.slice());
     this.requestOurTestimonies().subscribe();
   }
 
   refreshMyTestimony() {
+    this.loading.next(true)
     this.myTestimonies = [];
     this.myTestimonyListChanged.next(this.myTestimonies.slice());
     this.requestMyTestimonies().subscribe();

@@ -8,6 +8,9 @@
           </ul>
         </div>
         <div class="panel-body">
+          <div *ngIf="error" class="error-message">
+            {{ error }}
+          </div>
           <router-outlet></router-outlet>
         </div>
       </div>

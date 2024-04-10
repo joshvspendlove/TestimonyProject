@@ -10,22 +10,22 @@ const { verifySession, verifyLoggedIn } = require("../secure");
 router.get('/ours', (req, res, next) => {
   Testimony.find().populate('user_id').then(testimonies => {
     testimonies = testimonies.map(testimony => {
-      if (!testimony.is_private)
-      {
-        if (testimony.is_anonymous && testimony.user_id.id != req.session.user_id)
-          {
-            testimony.user_id.username = "Anonymous"
-            testimony.user_id.id = "-1"
+      if (!testimony.is_private) {
+        if (testimony.is_anonymous && testimony.user_id.id != req.session.user_id) {
+          testimony.user_id.username = "Anonymous"
+          testimony.user_id.id = "-1"
+        }
+        if (testimony.user_id) {
+          return {
+            id: testimony.id,
+            title: testimony.title,
+            body: testimony.body,
+            author: testimony.user_id.username,
+            author_id: testimony.user_id.id,
+            posted: testimony.posted_time,
+            is_private: testimony.is_private,
+            is_anonymous: testimony.is_anonymous
           }
-        return {
-          id: testimony.id,
-          title: testimony.title,
-          body: testimony.body,
-          author: testimony.user_id.username,
-          author_id: testimony.user_id.id,
-          posted: testimony.posted_time,
-          is_private: testimony.is_private,
-          is_anonymous: testimony.is_anonymous
         }
       }
     })
@@ -33,6 +33,7 @@ router.get('/ours', (req, res, next) => {
     res.status(200).json({ testimonies: testimonies });
   })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ message: 'An error occurred', error: err });
     })
 });
@@ -73,20 +74,19 @@ router.get('/:id?', (req, res, next) => {
       Testimony.find({ user_id: user._id }).then(testimonies => {
         testimonies = testimonies.map(testimony => {
           if (!testimony.is_private)
-          if (testimony.is_anonymous)
-          {
-            user.username = "Anonymous"
-            user.id = "-1"
-          }
-            return {
-              id: testimony.id,
-              title: testimony.title,
-              body: testimony.body,
-              author: user.username,
-              author_id: user.id,
-              posted: testimony.posted_time,
-              is_private: testimony.is_private
+            if (testimony.is_anonymous) {
+              user.username = "Anonymous"
+              user.id = "-1"
             }
+          return {
+            id: testimony.id,
+            title: testimony.title,
+            body: testimony.body,
+            author: user.username,
+            author_id: user.id,
+            posted: testimony.posted_time,
+            is_private: testimony.is_private
+          }
         })
         res.status(200).json({ testimonies: testimonies });
       })

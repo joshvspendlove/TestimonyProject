@@ -13,7 +13,7 @@ function SequenceGenerator() {
         maxUserId = sequence.maxUserId;
         maxTestimonyId = sequence.maxTestimonyId;
     }).catch(err => {
-        return res.status(500).json({
+        console.log({
             title: 'An error occurred',
             error: err
         });

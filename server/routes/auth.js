@@ -41,7 +41,8 @@ router.post('/signup', async (req, res, next) => {
             req.session.user_id = user.id
             res.status(201).json({
               status: "success",
-              message: 'User created successfully'
+              message: 'User created successfully',
+              user_id: user.id
             })
           })
           .catch(error => {

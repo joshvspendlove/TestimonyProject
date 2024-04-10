@@ -36,14 +36,14 @@
         <div class="form-group">
           <div class="checkbox">
             <label>
-              <input type="checkbox" formControlName="isPrivate" /> Private
+              <input type="checkbox" formControlName="is_private" /> Private
             </label>
           </div>
         </div>
-        <div class="form-group" *ngIf="!testimonyForm.get('isPrivate').value">
+        <div class="form-group" *ngIf="!testimonyForm.get('is_private').value">
           <div class="checkbox">
             <label>
-              <input type="checkbox" formControlName="anonymous" /> Anonymous
+              <input type="checkbox" formControlName="is_anonymous" /> Anonymous
             </label>
           </div>
         </div>
