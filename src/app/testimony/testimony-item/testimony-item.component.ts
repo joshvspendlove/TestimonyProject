@@ -3,7 +3,6 @@ import { Testimony } from '../testimony.model';
 import { TestimonyService } from '../testimony.service';
 import { AuthenticationService } from '../../authenticate/authentication.service';
 import { Location } from '@angular/common';
-import { Clipboard } from '@angular/cdk/clipboard';
 
 
 @Component({
@@ -15,7 +14,6 @@ export class TestimonyItemComponent implements OnInit {
   constructor(
     private testimonyService: TestimonyService,
     private authService: AuthenticationService,
-    private clipboard: Clipboard,
     private location: Location
   ) {}
 
@@ -33,11 +31,6 @@ export class TestimonyItemComponent implements OnInit {
     
   }
   
-  onShare()
-  {
-    const fullPath = window.location.origin + "/our-testimony";
-    this.clipboard.copy(fullPath + `/share/${this.testimony.id}`)
-  }
 
   onModalResponse(response: boolean)
   {
