@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-testimony-item
+      *ngFor="let testimony of testimonies"
+      [testimony]="testimony"
+    ></app-testimony-item>
+    <h4 *ngIf="listType=='mine' and testimonies.length == 0">No Testimonies to display. Share yours today!</h4>
+  </div>
+</div>

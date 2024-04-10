@@ -1,0 +1,27 @@
+.delete-link {
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.edit-link {
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+.share-link {
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.like-link {
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+.status {
+  margin-left: 15px;
+  color: #999
+}
+
+.preformatted-text {
+  white-space: pre-wrap;
+  font-family: inherit; /* Optionally inherit the font family */
+  font-size: inherit; /* Optionally inherit the font size */
+  line-height: inherit; /* Optionally inherit the line height */
+}
+

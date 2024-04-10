@@ -1,0 +1,6 @@
+.preformatted-text {
+    white-space: pre-wrap;
+    font-family: inherit; /* Optionally inherit the font family */
+    font-size: inherit; /* Optionally inherit the font size */
+    line-height: inherit; /* Optionally inherit the line height */
+  }

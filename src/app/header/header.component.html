@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Testimony Project</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li routerLinkActive="active"><a [routerLink]="['/our-testimony']">Our Testimony</a></li>
+                <li *ngIf="isLoggedIn()" routerLinkActive="active"><a [routerLink]="['/my-testimony']">My Testimony</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="isLoggedIn(); else login;" class="dropdown" appDropdown>
+                    <a class="dropdown-toggle" role="button">User <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li style="cursor: pointer;"><a (click)="logout()">Logout</a></li>
+                    </ul>
+                </li>
+                <ng-template #login><li><a [routerLink]="['/auth/login']">Login</a></li></ng-template>
+            </ul>
+        </div>
+    </div>
+</nav>

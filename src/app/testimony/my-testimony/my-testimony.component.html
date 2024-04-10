@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-12">
+      <a [routerLink]="[{ outlets: { new: 'new-testimony' } }]" class="btn btn-primary link-margin" *ngIf="!isSharing">Share Testimony</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <router-outlet name="new" (activate)="onRouterActivated()" (deactivate)="onRouterDeactivated()"></router-outlet>
+    </div>
+  </div>
+
+  <app-testimony-list listType="mine"></app-testimony-list>
+  <router-outlet></router-outlet>
+  

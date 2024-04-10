@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+  <div class="panel-heading text-center">
+    <div class="row">
+      <span class="title">{{ testimony.title }} - {{ testimony.author }} <span *ngIf="myPost && testimony.is_anonymous && !testimony.is_private">(Anonymous)</span></span>
+
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12 preformatted-text">{{ testimony.body }}</div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-sm-6">
+        <a class="btn btn-default share-link" [routerLink]="['view', testimony.id]">
+          View
+        </a>
+        <!--button class="btn btn-success like-link" *ngIf="!myPost">
+          <i class="fas fa-thumbs-up"></i> Like
+        </button-->
+      </div>
+      <div >
+        <div class="col-sm-6 text-right">
+          
+          <a *ngIf="myPost" class="delete-link" [routerLink]="['delete', testimony.id]">
+            <i class="fas fa-trash-alt"></i>
+          </a>
+          <a *ngIf="myPost" class="edit-link" [routerLink]="['edit', testimony.id]">
+            <i class="fas fa-pencil-alt"></i>
+          </a>
+
+          <span class="status" *ngIf="testimony.is_private">
+            <i class="fas fa-lock"></i> 
+          </span> 
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
