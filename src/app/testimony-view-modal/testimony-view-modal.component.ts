@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Testimony } from '../testimony/testimony.model';
 import { TestimonyService } from '../testimony/testimony.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TestimonyViewModalService } from './testimony-View-modal.service';
+import { TestimonyViewModalService } from './testimony-view-modal.service';
 
 @Component({
   selector: 'app-testimony-view-modal',
